@@ -3,29 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lancio della Moneta</title>
+    <title>Lancio della Moneta | Coin Flip</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="particles" id="particles"></div>
     
     <div class="container">
-        <h1>🎲 Lancia la Moneta!</h1>
+        <h1>COIN FLIP</h1>
         
         <div class="coin-container">
+            <div class="coin-ring"></div>
             <img id="flip" src="./flip.gif">
             <img id="testa" src="testa.png">
             <img id="croce" src="croce.png">
         </div>
         
-        <button onclick="lancia()">🚀 Lancia</button>
+        <button onclick="lancia()" id="btn-lancia">LANCIA</button>
         
-        <p id="ris">Premi il pulsante per lanciare</p>
+        <p id="ris">Pronto a lanciare?</p>
         
         <div class="stats">
             <span id="stats-text"></span>
         </div>
     </div>
+    
+    <div class="footer-text">Made with ❤️</div>
 
     <script src="script.js"></script>
 </body>

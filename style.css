@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -10,100 +12,175 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Rajdhani', sans-serif;
+    background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #0f0c29);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
     overflow: hidden;
 }
 
-.container {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(20px);
-    border-radius: 30px;
-    padding: 60px 80px;
-    box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    text-align: center;
-    animation: fadeIn 0.8s ease-out;
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.container {
+    position: relative;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    backdrop-filter: blur(30px);
+    border-radius: 40px;
+    padding: 70px 100px;
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.5),
+        0 0 100px rgba(139, 92, 246, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    animation: containerFloat 6s ease-in-out infinite;
+}
+
+@keyframes containerFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
 
 h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    color: #fff;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-    margin-bottom: 40px;
-    letter-spacing: 2px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #fff 0%, #a78bfa 50%, #f0abfc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+    margin-bottom: 20px;
+    letter-spacing: 4px;
+    filter: drop-shadow(0 0 30px rgba(167, 139, 250, 0.8));
+    animation: titlePulse 3s ease-in-out infinite;
+}
+
+@keyframes titlePulse {
+    0%, 100% { filter: drop-shadow(0 0 30px rgba(167, 139, 250, 0.8)); }
+    50% { filter: drop-shadow(0 0 50px rgba(240, 171, 252, 1)); }
 }
 
 .coin-container {
     position: relative;
-    width: 200px;
-    height: 200px;
-    margin: 30px auto;
+    width: 240px;
+    height: 240px;
+    margin: 40px auto;
     display: flex;
     align-items: center;
     justify-content: center;
+    perspective: 1000px;
+}
+
+.coin-ring {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    background: linear-gradient(145deg, rgba(167, 139, 250, 0.3), rgba(240, 171, 252, 0.3)) padding-box,
+                linear-gradient(145deg, #a78bfa, #f0abfc) border-box;
+    animation: ringRotate 4s linear infinite;
+}
+
+@keyframes ringRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.coin-ring::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: ringRotate 8s linear infinite reverse;
 }
 
 .coin-container img {
     position: absolute;
-    width: 180px;
-    height: 180px;
+    width: 200px;
+    height: 200px;
     object-fit: contain;
     border-radius: 50%;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4));
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6));
+    transform-style: preserve-3d;
 }
 
 button {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    position: relative;
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
     color: white;
     border: none;
-    padding: 18px 50px;
-    font-size: 1.3rem;
-    font-weight: 600;
-    border-radius: 50px;
+    padding: 22px 70px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+    border-radius: 60px;
     cursor: pointer;
-    margin: 30px 0;
+    margin: 40px 0;
     box-shadow: 
-        0 10px 30px rgba(245, 87, 108, 0.4),
-        0 5px 15px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-    letter-spacing: 1px;
+        0 15px 35px rgba(168, 85, 247, 0.4),
+        0 5px 15px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    letter-spacing: 3px;
     text-transform: uppercase;
+    overflow: hidden;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+button:hover::before {
+    left: 100%;
 }
 
 button:hover {
-    transform: translateY(-3px);
+    transform: translateY(-8px) scale(1.05);
     box-shadow: 
-        0 15px 40px rgba(245, 87, 108, 0.5),
-        0 8px 20px rgba(0, 0, 0, 0.3);
+        0 20px 50px rgba(168, 85, 247, 0.6),
+        0 10px 25px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 button:active {
-    transform: translateY(-1px);
+    transform: translateY(-4px) scale(1.02);
 }
 
 #ris {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #fff;
-    margin-top: 20px;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
-    min-height: 40px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-top: 30px;
+    min-height: 50px;
+    animation: resultGlow 2s ease-in-out infinite;
+}
+
+@keyframes resultGlow {
+    0%, 100% { filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.5)); }
+    50% { filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.8)); }
 }
 
 .particles {
@@ -118,43 +195,130 @@ button:active {
 
 .particle {
     position: absolute;
-    background: rgba(255, 255, 255, 0.3);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(167, 139, 250, 0.4) 100%);
     border-radius: 50%;
-    animation: float 15s infinite;
+    animation: float 20s infinite ease-in-out;
+    box-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
 }
 
 @keyframes float {
     0%, 100% {
-        transform: translateY(100vh) rotate(0deg);
+        transform: translateY(100vh) rotate(0deg) scale(0);
         opacity: 0;
     }
     10% {
         opacity: 1;
+        transform: translateY(80vh) rotate(180deg) scale(1);
     }
     90% {
         opacity: 1;
+        transform: translateY(-80vh) rotate(540deg) scale(1);
     }
     100% {
-        transform: translateY(-100vh) rotate(720deg);
+        transform: translateY(-100vh) rotate(720deg) scale(0);
         opacity: 0;
     }
 }
 
 #flip {
     opacity: 0;
+    animation: coinSpin 0.5s linear infinite;
+}
+
+@keyframes coinSpin {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
 }
 
 #testa, #croce {
     opacity: 0;
-    transform: scale(0.5) rotateY(180deg);
+    transform: scale(0) rotateY(180deg);
 }
 
 #testa[style*="opacity: 1"], #croce[style*="opacity: 1"] {
     transform: scale(1) rotateY(0deg);
+    animation: coinBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes coinBounce {
+    0% { transform: scale(0) rotateY(-180deg); }
+    50% { transform: scale(1.2) rotateY(0deg); }
+    100% { transform: scale(1) rotateY(0deg); }
 }
 
 .stats {
-    margin-top: 30px;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 1rem;
+    margin-top: 40px;
+    padding: 20px 40px;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+}
+
+.stats span {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 1px;
+}
+
+.confetti {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+@keyframes confettiFall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+.footer-text {
+    position: fixed;
+    bottom: 20px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 2px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 40px 30px;
+        margin: 20px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    button {
+        padding: 18px 50px;
+        font-size: 1.2rem;
+    }
+    
+    #ris {
+        font-size: 1.5rem;
+    }
+    
+    .coin-container {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .coin-container img {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .coin-ring {
+        width: 220px;
+        height: 220px;
+    }
 }
