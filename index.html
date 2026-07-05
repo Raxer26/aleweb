@@ -42,19 +42,34 @@
     <div class="music-player">
         <div class="music-header" onclick="togglePlayer()">
             <span>🎵</span>
-            <span class="music-title">MUSICA</span>
+            <span class="music-title">RADIO PLAYER</span>
             <span id="toggleIcon">▼</span>
         </div>
         <div class="music-body" id="musicBody">
-            <input type="text" id="audioUrl" placeholder="Incolla qui l'URL del file MP3">
-            <button onclick="playAudio()" class="play-btn">▶ PLAY</button>
-            <button onclick="pauseAudio()" class="pause-btn">⏸ PAUSA</button>
-            <button onclick="stopAudio()" class="stop-btn">⏹ STOP</button>
+            <div class="now-playing">
+                <div class="station-name" id="stationName">Seleziona una radio</div>
+            </div>
+            
+            <div class="radio-buttons">
+                <button onclick="playRadio(0)" class="radio-btn">🎵 Radio 105</button>
+                <button onclick="playRadio(1)" class="radio-btn">🎧 RDS</button>
+                <button onclick="playRadio(2)" class="radio-btn">🎤 RTL 102.5</button>
+                <button onclick="playRadio(3)" class="radio-btn">🕺 Kiss Kiss</button>
+                <button onclick="playRadio(4)" class="radio-btn">🎸 Virgin Radio</button>
+                <button onclick="playRadio(5)" class="radio-btn">🎹 Radio Deejay</button>
+                <button onclick="playRadio(6)" class="radio-btn">🌙 Lofi Hip Hop</button>
+                <button onclick="playRadio(7)" class="radio-btn">🎷 Smooth Jazz</button>
+            </div>
+            
+            <div class="audio-controls-main">
+                <button onclick="pauseAudio()" class="control-btn pause">⏸ PAUSA</button>
+                <button onclick="stopAudio()" class="control-btn stop">⏹ STOP</button>
+            </div>
+            
             <div class="volume-box">
-                <label>🔊 Volume:</label>
+                <label>🔊 Volume</label>
                 <input type="range" id="volumeSlider" min="0" max="100" value="50" onchange="changeVolume()">
             </div>
-            <p class="help-text">Cerca "free mp3 download" su Google per trovare file audio</p>
         </div>
     </div>
 

@@ -350,28 +350,33 @@ button:disabled {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 300px;
-    background: rgba(0, 0, 0, 0.9);
-    border-radius: 15px;
+    width: 320px;
+    background: rgba(0, 0, 0, 0.95);
+    border-radius: 20px;
     border: 2px solid rgba(255, 0, 110, 0.5);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
     z-index: 100;
 }
 
 .music-header {
-    padding: 12px 15px;
-    background: linear-gradient(135deg, rgba(255, 0, 110, 0.3) 0%, rgba(131, 56, 236, 0.3) 100%);
+    padding: 15px 18px;
+    background: linear-gradient(135deg, rgba(255, 0, 110, 0.4) 0%, rgba(131, 56, 236, 0.4) 100%);
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 10px;
-    border-radius: 13px 13px 0 0;
-    font-size: 1.3rem;
+    border-radius: 18px 18px 0 0;
+    font-size: 1.4rem;
+    transition: all 0.3s;
+}
+
+.music-header:hover {
+    background: linear-gradient(135deg, rgba(255, 0, 110, 0.5) 0%, rgba(131, 56, 236, 0.5) 100%);
 }
 
 .music-title {
     font-family: 'Orbitron', sans-serif;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 700;
     color: #fff;
     letter-spacing: 2px;
@@ -380,63 +385,97 @@ button:disabled {
 
 #toggleIcon {
     color: #fff;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     transition: transform 0.3s;
 }
 
 .music-body {
-    padding: 15px;
+    padding: 18px;
 }
 
 .music-body.hidden {
     display: none;
 }
 
-.music-body input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid rgba(255, 0, 110, 0.4);
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    font-size: 0.85rem;
-    margin-bottom: 10px;
-    outline: none;
+.now-playing {
+    background: rgba(255, 0, 110, 0.15);
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    text-align: center;
 }
 
-.music-body input[type="text"]::placeholder {
-    color: rgba(255, 255, 255, 0.5);
-}
-
-.music-body button {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
+.station-name {
+    font-family: 'Orbitron', sans-serif;
     font-size: 0.9rem;
-    border: none;
-    border-radius: 8px;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.radio-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.radio-btn {
+    padding: 12px 8px;
+    font-size: 0.8rem;
+    border: 2px solid rgba(255, 0, 110, 0.3);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
     cursor: pointer;
-    font-weight: 700;
     transition: all 0.3s;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
 }
 
-.play-btn {
-    background: linear-gradient(135deg, #00c853, #00e676);
-    color: #fff;
+.radio-btn:hover {
+    background: rgba(255, 0, 110, 0.2);
+    border-color: rgba(255, 0, 110, 0.6);
+    transform: translateY(-2px);
 }
 
-.pausa-btn {
+.radio-btn.active {
+    background: linear-gradient(135deg, rgba(255, 0, 110, 0.6) 0%, rgba(131, 56, 236, 0.6) 100%);
+    border-color: #ff006e;
+    box-shadow: 0 0 15px rgba(255, 0, 110, 0.5);
+}
+
+.audio-controls-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.control-btn {
+    padding: 12px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+}
+
+.control-btn.pause {
     background: linear-gradient(135deg, #ff9800, #ffc107);
-    color: #fff;
+    color: #000;
 }
 
-.stop-btn {
+.control-btn.stop {
     background: linear-gradient(135deg, #f44336, #ff5722);
     color: #fff;
 }
 
-.music-body button:hover {
-    transform: scale(1.02);
+.control-btn:hover {
+    transform: scale(1.05);
 }
 
 .volume-box {
@@ -447,7 +486,8 @@ button:disabled {
     display: block;
     color: #fff;
     font-size: 0.85rem;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    font-family: 'Rajdhani', sans-serif;
 }
 
 .volume-box input[type="range"] {
@@ -461,17 +501,12 @@ button:disabled {
 
 .volume-box input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     background: linear-gradient(135deg, #ff006e, #ffbe0b);
     cursor: pointer;
-}
-
-.help-text {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.7rem;
-    margin-top: 10px;
+    box-shadow: 0 0 10px rgba(255, 0, 110, 0.5);
 }
 
 @media (max-width: 768px) {

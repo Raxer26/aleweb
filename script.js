@@ -2,6 +2,18 @@ let testaCount = 0;
 let croceCount = 0;
 let isAnimating = false;
 let audio = null;
+let currentRadio = -1;
+
+const radioStations = [
+    { name: "Radio 105", url: "https://icy.unitedradio.it/VirginMP3.mp3" },
+    { name: "RDS", url: "https://stream.rds.it:8000/rds" },
+    { name: "RTL 102.5", url: "https://streamingv2.shoutcast.com/RTL1025" },
+    { name: "Kiss Kiss", url: "https://icy.unitedradio.it/KissKissMP3.mp3" },
+    { name: "Virgin Radio", url: "https://icy.unitedradio.it/VirginMP3.mp3" },
+    { name: "Radio Deejay", url: "https://dj.deejayradio.net/dj_mp3" },
+    { name: "Lofi Hip Hop", url: "https://streams.ilovemusic.de/iloveradio17.mp3" },
+    { name: "Smooth Jazz", url: "https://strw3.openstream.co/1498" }
+];
 
 function createParticles() {
     const container = document.getElementById('particles');
@@ -107,28 +119,43 @@ function togglePlayer() {
     }
 }
 
-function playAudio() {
-    const url = document.getElementById('audioUrl').value.trim();
-    
-    if (!url) {
-        alert('Inserisci un URL MP3 valido!');
-        return;
-    }
-    
+function playRadio(index) {
     if (!audio) {
         audio = new Audio();
     }
     
-    audio.src = url;
+    stopAudio();
+    
+    const station = radioStations[index];
+    currentRadio = index;
+    
+    audio.src = station.url;
     audio.volume = document.getElementById('volumeSlider').value / 100;
+    
+    document.getElementById('stationName').textContent = '🔊 ' + station.name;
+    
     audio.play().catch(e => {
-        alert('Errore: impossibile riprodurre il file. Verifica che l\'URL sia corretto.');
+        document.getElementById('stationName').textContent = '❌ Errore connessione';
+    });
+    
+    document.querySelectorAll('.radio-btn').forEach((btn, i) => {
+        if (i === index) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
     });
 }
 
 function pauseAudio() {
-    if (audio) {
+    if (audio && !audio.paused) {
         audio.pause();
+        document.getElementById('stationName').textContent = '⏸ In pausa';
+    } else if (audio && audio.paused) {
+        audio.play();
+        if (currentRadio >= 0) {
+            document.getElementById('stationName').textContent = '🔊 ' + radioStations[currentRadio].name;
+        }
     }
 }
 
@@ -136,7 +163,10 @@ function stopAudio() {
     if (audio) {
         audio.pause();
         audio.currentTime = 0;
+        audio.src = '';
     }
+    document.getElementById('stationName').textContent = 'Seleziona una radio';
+    document.querySelectorAll('.radio-btn').forEach(btn => btn.classList.remove('active'));
 }
 
 function changeVolume() {
