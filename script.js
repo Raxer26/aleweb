@@ -6,23 +6,6 @@ let playlist = [];
 let currentTrackIndex = 0;
 let isPlaying = false;
 
-function createParticles() {
-    const container = document.getElementById('particles');
-    for (let i = 0; i < 30; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.left = Math.random() * 100 + '%';
-        const size = Math.random() * 8 + 3;
-        particle.style.width = size + 'px';
-        particle.style.height = size + 'px';
-        particle.style.animationDelay = Math.random() * 20 + 's';
-        particle.style.animationDuration = Math.random() * 15 + 15 + 's';
-        container.appendChild(particle);
-    }
-}
-
-createParticles();
-
 function createConfetti() {
     const colors = ['#ff006e', '#fb5607', '#ffbe0b', '#8338ec', '#3a86ff', '#ffd700', '#ff69b4'];
     const confettiCount = 60;
