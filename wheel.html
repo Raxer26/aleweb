@@ -3,44 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lancio della Moneta | Coin Flip</title>
+    <title>Ruota della Fortuna</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="particles" id="particles"></div>
     
     <nav class="nav-bar">
-        <a href="index.html" class="nav-link active">🪙 Coin Flip</a>
-        <a href="wheel.html" class="nav-link">🎡 Ruota</a>
+        <a href="index.html" class="nav-link">🪙 Coin Flip</a>
+        <a href="wheel.html" class="nav-link active">🎡 Ruota</a>
     </nav>
     
-    <div class="container">
-        <h1>COIN FLIP</h1>
+    <div class="container wheel-container">
+        <h1>RUOTA DELLA FORTUNA</h1>
         
-        <div class="coin-container">
-            <div class="coin-ring"></div>
-            <div class="coin" id="coin">
-                <div class="coin-face coin-head">
-                    <div class="coin-inner">
-                        <div class="coin-symbol">👑</div>
-                        <div class="coin-label">TESTA</div>
-                    </div>
-                </div>
-                <div class="coin-face coin-tail">
-                    <div class="coin-inner">
-                        <div class="coin-symbol">🌿</div>
-                        <div class="coin-label">CROCE</div>
-                    </div>
-                </div>
-            </div>
+        <div class="wheel-wrapper">
+            <div class="pointer">▼</div>
+            <canvas id="wheelCanvas" width="400" height="400"></canvas>
         </div>
         
-        <button onclick="lancia()" id="btn-lancia">LANCIA</button>
-        
-        <p id="ris">Pronto a lanciare?</p>
-        
-        <div class="stats">
-            <span id="stats-text"></span>
+        <div class="wheel-controls">
+            <div class="input-section">
+                <input type="text" id="optionInput" placeholder="Aggiungi opzione..." maxlength="30">
+                <button onclick="addOption()" class="add-btn">➕ AGGIUNGI</button>
+            </div>
+            
+            <div class="options-list" id="optionsList"></div>
+            
+            <button onclick="spinWheel()" id="spinBtn" class="spin-btn">🎡 GIRA!</button>
+            
+            <div class="result-display" id="resultDisplay"></div>
         </div>
     </div>
     
@@ -84,5 +76,6 @@
     </div>
 
     <script src="script.js"></script>
+    <script src="wheel.js"></script>
 </body>
 </html>
