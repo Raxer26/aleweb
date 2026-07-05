@@ -2,18 +2,9 @@ let testaCount = 0;
 let croceCount = 0;
 let isAnimating = false;
 let audio = null;
-let currentRadio = -1;
-
-const radioStations = [
-    { name: "Radio 105", url: "https://icy.unitedradio.it/VirginMP3.mp3" },
-    { name: "RDS", url: "https://stream.rds.it:8000/rds" },
-    { name: "RTL 102.5", url: "https://streamingv2.shoutcast.com/RTL1025" },
-    { name: "Kiss Kiss", url: "https://icy.unitedradio.it/KissKissMP3.mp3" },
-    { name: "Virgin Radio", url: "https://icy.unitedradio.it/VirginMP3.mp3" },
-    { name: "Radio Deejay", url: "https://dj.deejayradio.net/dj_mp3" },
-    { name: "Lofi Hip Hop", url: "https://streams.ilovemusic.de/iloveradio17.mp3" },
-    { name: "Smooth Jazz", url: "https://strw3.openstream.co/1498" }
-];
+let playlist = [];
+let currentTrackIndex = 0;
+let isPlaying = false;
 
 function createParticles() {
     const container = document.getElementById('particles');
@@ -119,54 +110,115 @@ function togglePlayer() {
     }
 }
 
-function playRadio(index) {
-    if (!audio) {
-        audio = new Audio();
+function handleFiles(event) {
+    const files = event.target.files;
+    
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        if (file.type.startsWith('audio/')) {
+            const url = URL.createObjectURL(file);
+            const name = file.name.replace(/\.[^/.]+$/, "");
+            playlist.push({ name: name, url: url });
+        }
     }
     
-    stopAudio();
+    renderPlaylist();
     
-    const station = radioStations[index];
-    currentRadio = index;
+    if (playlist.length > 0 && !audio) {
+        audio = new Audio();
+        audio.addEventListener('timeupdate', updateProgress);
+        audio.addEventListener('loadedmetadata', updateDuration);
+        audio.addEventListener('ended', nextTrack);
+        loadTrack(0);
+    }
+}
+
+function renderPlaylist() {
+    const container = document.getElementById('playlist');
+    container.innerHTML = '';
     
-    audio.src = station.url;
+    playlist.forEach((track, index) => {
+        const item = document.createElement('div');
+        item.className = `playlist-item ${index === currentTrackIndex ? 'active' : ''}`;
+        item.onclick = () => loadTrack(index);
+        item.innerHTML = `
+            <span class="track-number">${index + 1}</span>
+            <span class="track-title">${track.name}</span>
+        `;
+        container.appendChild(item);
+    });
+}
+
+function loadTrack(index) {
+    if (!audio || playlist.length === 0) return;
+    
+    currentTrackIndex = index;
+    audio.src = playlist[index].url;
     audio.volume = document.getElementById('volumeSlider').value / 100;
     
-    document.getElementById('stationName').textContent = '🔊 ' + station.name;
+    document.getElementById('trackName').textContent = playlist[index].name;
+    renderPlaylist();
     
-    audio.play().catch(e => {
-        document.getElementById('stationName').textContent = '❌ Errore connessione';
-    });
-    
-    document.querySelectorAll('.radio-btn').forEach((btn, i) => {
-        if (i === index) {
-            btn.classList.add('active');
-        } else {
-            btn.classList.remove('active');
-        }
-    });
-}
-
-function pauseAudio() {
-    if (audio && !audio.paused) {
-        audio.pause();
-        document.getElementById('stationName').textContent = '⏸ In pausa';
-    } else if (audio && audio.paused) {
-        audio.play();
-        if (currentRadio >= 0) {
-            document.getElementById('stationName').textContent = '🔊 ' + radioStations[currentRadio].name;
-        }
+    if (isPlaying) {
+        audio.play().catch(e => console.log('Play error'));
     }
 }
 
-function stopAudio() {
-    if (audio) {
-        audio.pause();
-        audio.currentTime = 0;
-        audio.src = '';
+function togglePlay() {
+    if (!audio || playlist.length === 0) {
+        alert('Carica prima dei file MP3!');
+        return;
     }
-    document.getElementById('stationName').textContent = 'Seleziona una radio';
-    document.querySelectorAll('.radio-btn').forEach(btn => btn.classList.remove('active'));
+    
+    const playBtn = document.getElementById('playBtn');
+    
+    if (isPlaying) {
+        audio.pause();
+        playBtn.textContent = '▶';
+    } else {
+        audio.play().catch(e => console.log('Play error'));
+        playBtn.textContent = '⏸';
+    }
+    
+    isPlaying = !isPlaying;
+}
+
+function nextTrack() {
+    if (playlist.length === 0) return;
+    currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+    loadTrack(currentTrackIndex);
+    if (isPlaying) audio.play().catch(e => console.log('Play error'));
+}
+
+function previousTrack() {
+    if (playlist.length === 0) return;
+    currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+    loadTrack(currentTrackIndex);
+    if (isPlaying) audio.play().catch(e => console.log('Play error'));
+}
+
+function updateProgress() {
+    if (!audio) return;
+    const progressBar = document.getElementById('progressBar');
+    const currentTime = document.getElementById('currentTime');
+    
+    if (audio.duration) {
+        const percent = (audio.currentTime / audio.duration) * 100;
+        progressBar.style.width = percent + '%';
+        currentTime.textContent = formatTime(audio.currentTime);
+    }
+}
+
+function updateDuration() {
+    if (!audio) return;
+    document.getElementById('duration').textContent = formatTime(audio.duration);
+}
+
+function formatTime(seconds) {
+    if (isNaN(seconds)) return '0:00';
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
 
 function changeVolume() {
@@ -174,3 +226,10 @@ function changeVolume() {
         audio.volume = document.getElementById('volumeSlider').value / 100;
     }
 }
+
+document.querySelector('.progress-container')?.addEventListener('click', function(e) {
+    if (!audio || !audio.duration) return;
+    const rect = this.getBoundingClientRect();
+    const percent = (e.clientX - rect.left) / rect.width;
+    audio.currentTime = percent * audio.duration;
+});

@@ -42,28 +42,33 @@
     <div class="music-player">
         <div class="music-header" onclick="togglePlayer()">
             <span>🎵</span>
-            <span class="music-title">RADIO PLAYER</span>
+            <span class="music-title">MUSIC PLAYER</span>
             <span id="toggleIcon">▼</span>
         </div>
         <div class="music-body" id="musicBody">
             <div class="now-playing">
-                <div class="station-name" id="stationName">Seleziona una radio</div>
+                <div class="track-name" id="trackName">Nessun brano selezionato</div>
             </div>
             
-            <div class="radio-buttons">
-                <button onclick="playRadio(0)" class="radio-btn">🎵 Radio 105</button>
-                <button onclick="playRadio(1)" class="radio-btn">🎧 RDS</button>
-                <button onclick="playRadio(2)" class="radio-btn">🎤 RTL 102.5</button>
-                <button onclick="playRadio(3)" class="radio-btn">🕺 Kiss Kiss</button>
-                <button onclick="playRadio(4)" class="radio-btn">🎸 Virgin Radio</button>
-                <button onclick="playRadio(5)" class="radio-btn">🎹 Radio Deejay</button>
-                <button onclick="playRadio(6)" class="radio-btn">🌙 Lofi Hip Hop</button>
-                <button onclick="playRadio(7)" class="radio-btn">🎷 Smooth Jazz</button>
-            </div>
+            <label class="upload-btn">
+                📁 CARICA MP3
+                <input type="file" id="audioFile" accept="audio/*" multiple onchange="handleFiles(event)" hidden>
+            </label>
+            
+            <div class="playlist" id="playlist"></div>
             
             <div class="audio-controls-main">
-                <button onclick="pauseAudio()" class="control-btn pause">⏸ PAUSA</button>
-                <button onclick="stopAudio()" class="control-btn stop">⏹ STOP</button>
+                <button onclick="previousTrack()" class="control-btn nav">⏮</button>
+                <button onclick="togglePlay()" id="playBtn" class="control-btn play">▶</button>
+                <button onclick="nextTrack()" class="control-btn nav">⏭</button>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="time-info">
+                <span id="currentTime">0:00</span>
+                <span id="duration">0:00</span>
             </div>
             
             <div class="volume-box">
