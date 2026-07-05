@@ -350,323 +350,128 @@ button:disabled {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 380px;
-    background: linear-gradient(145deg, rgba(0, 0, 0, 0.9) 0%, rgba(20, 20, 40, 0.95) 100%);
-    backdrop-filter: blur(20px);
-    border-radius: 20px;
-    border: 2px solid rgba(255, 0, 110, 0.4);
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+    width: 300px;
+    background: rgba(0, 0, 0, 0.9);
+    border-radius: 15px;
+    border: 2px solid rgba(255, 0, 110, 0.5);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     z-index: 100;
-    overflow: hidden;
 }
 
 .music-header {
-    padding: 15px 20px;
-    background: linear-gradient(135deg, rgba(255, 0, 110, 0.25) 0%, rgba(131, 56, 236, 0.25) 100%);
+    padding: 12px 15px;
+    background: linear-gradient(135deg, rgba(255, 0, 110, 0.3) 0%, rgba(131, 56, 236, 0.3) 100%);
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 10px;
-    transition: all 0.3s ease;
-}
-
-.music-header:hover {
-    background: linear-gradient(135deg, rgba(255, 0, 110, 0.35) 0%, rgba(131, 56, 236, 0.35) 100%);
-}
-
-.music-icon {
-    font-size: 1.5rem;
-    animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+    border-radius: 13px 13px 0 0;
+    font-size: 1.3rem;
 }
 
 .music-title {
     font-family: 'Orbitron', sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 700;
     color: #fff;
     letter-spacing: 2px;
     flex: 1;
 }
 
-.music-toggle {
+#toggleIcon {
     color: #fff;
-    font-size: 0.8rem;
-    transition: transform 0.3s ease;
-}
-
-.music-toggle.collapsed {
-    transform: rotate(-90deg);
+    font-size: 0.7rem;
+    transition: transform 0.3s;
 }
 
 .music-body {
-    padding: 20px;
-    max-height: 500px;
-    overflow-y: auto;
-    transition: all 0.4s ease;
+    padding: 15px;
 }
 
-.music-body.collapsed {
-    max-height: 0;
-    padding: 0 20px;
+.music-body.hidden {
+    display: none;
 }
 
-.now-playing {
-    margin-bottom: 20px;
-}
-
-.track-info {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 15px;
-    padding: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-}
-
-.track-icon {
-    font-size: 2.5rem;
-    animation: bounce 1s ease-in-out infinite;
-}
-
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-}
-
-.track-icon.paused {
-    animation: none;
-}
-
-.track-details {
-    flex: 1;
-}
-
-.track-name {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 4px;
-}
-
-.track-artist {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.6);
-}
-
-.audio-controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-.control-btn {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    border: 2px solid rgba(255, 0, 110, 0.5);
-    background: rgba(255, 0, 110, 0.1);
-    color: #fff;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.control-btn:hover {
-    background: rgba(255, 0, 110, 0.3);
-    transform: scale(1.1);
-}
-
-.play-btn {
-    width: 60px;
-    height: 60px;
-    font-size: 1.5rem;
-    background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%);
-    border: none;
-    box-shadow: 0 5px 20px rgba(255, 0, 110, 0.4);
-}
-
-.play-btn:hover {
-    box-shadow: 0 8px 30px rgba(255, 0, 110, 0.6);
-}
-
-.progress-container {
+.music-body input[type="text"] {
     width: 100%;
-    height: 6px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 3px;
-    cursor: pointer;
-    margin-bottom: 8px;
-    overflow: hidden;
-}
-
-.progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, #ff006e 0%, #ffbe0b 100%);
-    border-radius: 3px;
-    width: 0%;
-    transition: width 0.1s linear;
-}
-
-.time-display {
-    display: flex;
-    justify-content: space-between;
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 15px;
-}
-
-.volume-control {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.volume-control span {
-    font-size: 1.2rem;
-}
-
-.volume-control input[type="range"] {
-    flex: 1;
-    height: 6px;
-    border-radius: 3px;
-    background: rgba(255, 255, 255, 0.2);
-    outline: none;
-    -webkit-appearance: none;
-}
-
-.volume-control input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #ff006e, #ffbe0b);
-    cursor: pointer;
-    box-shadow: 0 2px 10px rgba(255, 0, 110, 0.5);
-}
-
-.playlist {
-    margin-top: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 15px;
-}
-
-.playlist-header {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.7);
-    letter-spacing: 1px;
-    margin-bottom: 10px;
-}
-
-.playlist-items {
-    max-height: 150px;
-    overflow-y: auto;
-}
-
-.playlist-item {
-    display: flex;
-    align-items: center;
     padding: 10px;
-    margin-bottom: 5px;
-    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 0, 110, 0.4);
     border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.playlist-item:hover {
-    background: rgba(255, 0, 110, 0.2);
-}
-
-.playlist-item.active {
-    background: linear-gradient(135deg, rgba(255, 0, 110, 0.3) 0%, rgba(131, 56, 236, 0.3) 100%);
-    border-left: 3px solid #ff006e;
-}
-
-.playlist-item-icon {
-    font-size: 1.3rem;
-    margin-right: 10px;
-}
-
-.playlist-item-info {
-    flex: 1;
-}
-
-.playlist-item-name {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.1);
     color: #fff;
-    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+    outline: none;
 }
 
-.playlist-item-duration {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 0.75rem;
+.music-body input[type="text"]::placeholder {
     color: rgba(255, 255, 255, 0.5);
 }
 
-.custom-url {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.custom-url input {
-    flex: 1;
-    padding: 10px 15px;
-    border: 2px solid rgba(255, 0, 110, 0.3);
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 0.85rem;
-    outline: none;
-    transition: all 0.3s ease;
-}
-
-.custom-url input::placeholder {
-    color: rgba(255, 255, 255, 0.4);
-}
-
-.custom-url input:focus {
-    border-color: #ff006e;
-    background: rgba(255, 255, 255, 0.15);
-}
-
-.btn-load {
-    padding: 10px 20px;
-    background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%);
-    color: #fff;
+.music-body button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 0.9rem;
     border: none;
-    border-radius: 10px;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 700;
+    border-radius: 8px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    letter-spacing: 1px;
-    white-space: nowrap;
+    font-weight: 700;
+    transition: all 0.3s;
 }
 
-.btn-load:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 20px rgba(255, 0, 110, 0.5);
+.play-btn {
+    background: linear-gradient(135deg, #00c853, #00e676);
+    color: #fff;
+}
+
+.pausa-btn {
+    background: linear-gradient(135deg, #ff9800, #ffc107);
+    color: #fff;
+}
+
+.stop-btn {
+    background: linear-gradient(135deg, #f44336, #ff5722);
+    color: #fff;
+}
+
+.music-body button:hover {
+    transform: scale(1.02);
+}
+
+.volume-box {
+    margin-top: 10px;
+}
+
+.volume-box label {
+    display: block;
+    color: #fff;
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+}
+
+.volume-box input[type="range"] {
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    outline: none;
+    -webkit-appearance: none;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.volume-box input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff006e, #ffbe0b);
+    cursor: pointer;
+}
+
+.help-text {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.7rem;
+    margin-top: 10px;
 }
 
 @media (max-width: 768px) {
@@ -684,7 +489,7 @@ button:disabled {
         font-size: 1.2rem;
     }
     
-    #res {
+    #ris {
         font-size: 1.5rem;
     }
     

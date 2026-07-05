@@ -39,48 +39,22 @@
         </div>
     </div>
     
-    <div class="music-player" id="musicPlayer">
-        <div class="music-header" onclick="toggleMusicPlayer()">
-            <span class="music-icon">🎵</span>
-            <span class="music-title">Music Player</span>
-            <span class="music-toggle" id="toggleIcon">▼</span>
+    <div class="music-player">
+        <div class="music-header" onclick="togglePlayer()">
+            <span>🎵</span>
+            <span class="music-title">MUSICA</span>
+            <span id="toggleIcon">▼</span>
         </div>
         <div class="music-body" id="musicBody">
-            <div class="now-playing">
-                <div class="track-info">
-                    <div class="track-icon">🎶</div>
-                    <div class="track-details">
-                        <div class="track-name" id="trackName">Seleziona una traccia</div>
-                        <div class="track-artist" id="trackArtist">--</div>
-                    </div>
-                </div>
-                <audio id="audioPlayer" preload="auto"></audio>
-                <div class="audio-controls">
-                    <button class="control-btn" onclick="prevTrack()">⏮</button>
-                    <button class="control-btn play-btn" id="playBtn" onclick="togglePlay()">▶</button>
-                    <button class="control-btn" onclick="nextTrack()">⏭</button>
-                </div>
-                <div class="progress-container" onclick="seekAudio(event)">
-                    <div class="progress-bar" id="progressBar"></div>
-                </div>
-                <div class="time-display">
-                    <span id="currentTime">0:00</span>
-                    <span id="duration">0:00</span>
-                </div>
-                <div class="volume-control">
-                    <span>🔊</span>
-                    <input type="range" id="musicVolume" min="0" max="100" value="50" onchange="updateMusicVolume()">
-                </div>
+            <input type="text" id="audioUrl" placeholder="Incolla qui l'URL del file MP3">
+            <button onclick="playAudio()" class="play-btn">▶ PLAY</button>
+            <button onclick="pauseAudio()" class="pause-btn">⏸ PAUSA</button>
+            <button onclick="stopAudio()" class="stop-btn">⏹ STOP</button>
+            <div class="volume-box">
+                <label>🔊 Volume:</label>
+                <input type="range" id="volumeSlider" min="0" max="100" value="50" onchange="changeVolume()">
             </div>
-            <div class="playlist">
-                <div class="playlist-header">Playlist</div>
-                <div class="playlist-items" id="playlistItems">
-                </div>
-            </div>
-            <div class="custom-url">
-                <input type="text" id="customUrl" placeholder="URL file audio MP3...">
-                <button onclick="loadCustomAudio()" class="btn-load">AGGIUNGI</button>
-            </div>
+            <p class="help-text">Cerca "free mp3 download" su Google per trovare file audio</p>
         </div>
     </div>
 
