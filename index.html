@@ -38,6 +38,41 @@
             <span id="stats-text"></span>
         </div>
     </div>
+    
+    <div class="music-player" id="musicPlayer">
+        <div class="music-header" onclick="toggleMusicPlayer()">
+            <span class="music-icon">🎵</span>
+            <span class="music-title">Music Player</span>
+            <span class="music-toggle" id="toggleIcon">▼</span>
+        </div>
+        <div class="music-body" id="musicBody">
+            <div class="music-input-group">
+                <input type="text" id="youtubeUrl" placeholder="Incolla URL YouTube qui..." />
+                <button onclick="loadYouTubeVideo()" class="btn-load">CARICA</button>
+            </div>
+            <div class="youtube-container" id="youtubeContainer">
+                <div class="youtube-placeholder" id="youtubePlaceholder">
+                    <span class="placeholder-icon">🎶</span>
+                    <p>Inserisci un link YouTube per ascoltare musica</p>
+                </div>
+            </div>
+            <div class="sound-controls">
+                <div class="control-group">
+                    <label>🔊 Effetti Sonori</label>
+                    <input type="range" id="sfxVolume" min="0" max="100" value="70" onchange="updateSfxVolume()">
+                </div>
+                <div class="control-group">
+                    <label>🎵 Volume Musica</label>
+                    <input type="range" id="musicVolume" min="0" max="100" value="50" onchange="updateMusicVolume()">
+                </div>
+            </div>
+            <div class="preset-buttons">
+                <button onclick="loadPreset('dQw4w9WgXcQ')" class="preset-btn">🎸 Rick Roll</button>
+                <button onclick="loadPreset('fJ9rUzIMcZQ')" class="preset-btn">🎹 Lofi Beats</button>
+                <button onclick="loadPreset('j0kLV7U78Vk')" class="preset-btn">🎸 Rock Classics</button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

@@ -346,6 +346,208 @@ button:disabled {
     }
 }
 
+.music-player {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 350px;
+    background: linear-gradient(145deg, rgba(0, 0, 0, 0.85) 0%, rgba(20, 20, 40, 0.9) 100%);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    border: 2px solid rgba(255, 0, 110, 0.3);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    overflow: hidden;
+}
+
+.music-header {
+    padding: 15px 20px;
+    background: linear-gradient(135deg, rgba(255, 0, 110, 0.2) 0%, rgba(131, 56, 236, 0.2) 100%);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.music-header:hover {
+    background: linear-gradient(135deg, rgba(255, 0, 110, 0.3) 0%, rgba(131, 56, 236, 0.3) 100%);
+}
+
+.music-icon {
+    font-size: 1.5rem;
+}
+
+.music-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 2px;
+    flex: 1;
+}
+
+.music-toggle {
+    color: #fff;
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.music-toggle.collapsed {
+    transform: rotate(-90deg);
+}
+
+.music-body {
+    padding: 20px;
+    max-height: 400px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.music-body.collapsed {
+    max-height: 0;
+    padding: 0 20px;
+}
+
+.music-input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.music-input-group input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 2px solid rgba(255, 0, 110, 0.3);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.music-input-group input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.music-input-group input:focus {
+    border-color: #ff006e;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.btn-load {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+}
+
+.btn-load:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(255, 0, 110, 0.5);
+}
+
+.youtube-container {
+    margin: 15px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.youtube-placeholder {
+    padding: 40px 20px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.placeholder-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.youtube-placeholder p {
+    font-size: 0.85rem;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.youtube-container iframe {
+    width: 100%;
+    height: 200px;
+    border: none;
+    border-radius: 12px;
+}
+
+.sound-controls {
+    margin: 15px 0;
+}
+
+.control-group {
+    margin-bottom: 12px;
+}
+
+.control-group label {
+    display: block;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 5px;
+}
+
+.control-group input[type="range"] {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.control-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff006e, #ffbe0b);
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(255, 0, 110, 0.5);
+}
+
+.preset-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.preset-btn {
+    flex: 1;
+    min-width: 80px;
+    padding: 8px 12px;
+    background: linear-gradient(135deg, rgba(255, 0, 110, 0.3) 0%, rgba(131, 56, 236, 0.3) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.preset-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 0, 110, 0.5) 0%, rgba(131, 56, 236, 0.5) 100%);
+    transform: translateY(-2px);
+}
+
 @media (max-width: 768px) {
     .container {
         padding: 40px 30px;
@@ -386,5 +588,11 @@ button:disabled {
     
     .coin-label {
         font-size: 0.7rem;
+    }
+    
+    .music-player {
+        width: calc(100% - 40px);
+        left: 20px;
+        right: 20px;
     }
 }
