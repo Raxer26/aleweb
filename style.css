@@ -16,7 +16,9 @@ body {
     background: linear-gradient(-45deg, #ff006e, #fb5607, #ffbe0b, #8338ec, #3a86ff);
     background-size: 400% 400%;
     animation: gradientShift 15s ease infinite;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-top: 100px;
 }
 
 @keyframes gradientShift {
@@ -39,6 +41,8 @@ body {
     border: 2px solid rgba(255, 255, 255, 0.15);
     text-align: center;
     animation: containerFloat 6s ease-in-out infinite;
+    margin: 20px;
+    max-width: 600px;
 }
 
 @keyframes containerFloat {
@@ -653,7 +657,11 @@ button:disabled {
 }
 
 .wheel-container {
-    padding: 80px 50px 50px;
+    padding: 30px 30px 150px;
+    margin-bottom: 20px;
+    max-width: 700px;
+    width: 95%;
+    animation: none;
 }
 
 .wheel-wrapper {
@@ -661,10 +669,13 @@ button:disabled {
     display: flex;
     justify-content: center;
     margin-bottom: 30px;
+    width: 100%;
 }
 
 #wheelCanvas {
     filter: drop-shadow(0 0 30px rgba(255, 0, 110, 0.6));
+    max-width: 100%;
+    height: auto;
 }
 
 .pointer {
