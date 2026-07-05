@@ -746,15 +746,15 @@ button:disabled {
 
 .remove-btn {
     position: absolute;
-    top: -8px;
-    right: -8px;
-    width: 22px;
-    height: 22px;
+    top: -6px;
+    right: -6px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
-    border: 2px solid #fff;
-    background: linear-gradient(135deg, #f44336, #ff5722);
+    border: none;
+    background: #f44336;
     color: #fff;
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s;
@@ -762,6 +762,7 @@ button:disabled {
     align-items: center;
     justify-content: center;
     opacity: 0;
+    box-shadow: 0 2px 8px rgba(244, 67, 54, 0.4);
 }
 
 .option-item:hover .remove-btn {
@@ -770,35 +771,9 @@ button:disabled {
 
 .remove-btn:hover {
     transform: scale(1.2);
-    box-shadow: 0 0 15px rgba(244, 67, 54, 0.6);
+    box-shadow: 0 0 15px rgba(244, 67, 54, 0.8);
 }
     color: #fff;
-}
-
-.spin-btn {
-    padding: 20px 60px;
-    background: linear-gradient(135deg, #ff006e 0%, #8338ec 100%);
-    color: #fff;
-    border: none;
-    border-radius: 50px;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s;
-    letter-spacing: 3px;
-    box-shadow: 0 10px 30px rgba(255, 0, 110, 0.5);
-    margin: 20px 0;
-}
-
-.spin-btn:hover:not(:disabled) {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(255, 0, 110, 0.7);
-}
-
-.spin-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
 }
 
 .result-display {

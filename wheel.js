@@ -72,6 +72,17 @@ function drawWheel() {
     ctx.fillStyle = '#ff006e';
     ctx.textAlign = 'center';
     ctx.fillText('GIRA', centerX, centerY + 5);
+    
+    canvas.onclick = function(e) {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left - centerX;
+        const y = e.clientY - rect.top - centerY;
+        const distance = Math.sqrt(x * x + y * y);
+        
+        if (distance <= 40) {
+            spinWheel();
+        }
+    };
 }
 
 function renderOptions() {
@@ -125,10 +136,8 @@ function spinWheel() {
     if (isSpinning) return;
     
     isSpinning = true;
-    const spinBtn = document.getElementById('spinBtn');
     const resultDisplay = document.getElementById('resultDisplay');
     
-    spinBtn.disabled = true;
     resultDisplay.textContent = '';
     
     const spins = 5 + Math.random() * 5;
@@ -151,7 +160,6 @@ function spinWheel() {
             requestAnimationFrame(animate);
         } else {
             isSpinning = false;
-            spinBtn.disabled = false;
             
             const normalizedRotation = ((currentRotation % 360) + 360) % 360;
             const sliceAngle = 360 / options.length;
