@@ -20,16 +20,16 @@ function createParticles() {
 createParticles();
 
 function createConfetti() {
-    const colors = ['#fbbf24', '#f59e0b', '#a855f7', '#ec4899', '#6366f1', '#3b82f6'];
-    const confettiCount = 50;
+    const colors = ['#ff006e', '#fb5607', '#ffbe0b', '#8338ec', '#3a86ff', '#ffd700', '#ff69b4'];
+    const confettiCount = 60;
     
     for (let i = 0; i < confettiCount; i++) {
         const confetti = document.createElement('div');
         confetti.className = 'confetti';
         confetti.style.left = Math.random() * 100 + 'vw';
         confetti.style.top = '-20px';
-        confetti.style.width = Math.random() * 10 + 5 + 'px';
-        confetti.style.height = Math.random() * 10 + 5 + 'px';
+        confetti.style.width = Math.random() * 12 + 6 + 'px';
+        confetti.style.height = Math.random() * 12 + 6 + 'px';
         confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
         confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
         confetti.style.animation = `confettiFall ${Math.random() * 2 + 2}s linear forwards`;
@@ -44,20 +44,15 @@ function lancia() {
     if (isAnimating) return;
     isAnimating = true;
     
-    const flipEl = document.getElementById("flip");
-    const testaEl = document.getElementById("testa");
-    const croceEl = document.getElementById("croce");
+    const coin = document.getElementById("coin");
     const risEl = document.getElementById("ris");
     const btn = document.getElementById("btn-lancia");
     
+    btn.disabled = true;
     btn.style.transform = 'scale(0.95)';
     setTimeout(() => btn.style.transform = '', 200);
     
-    testaEl.style.opacity = 0;
-    croceEl.style.opacity = 0;
-    testaEl.style.transform = "scale(0) rotateY(180deg)";
-    croceEl.style.transform = "scale(0) rotateY(180deg)";
-    flipEl.style.opacity = 1;
+    coin.className = 'coin flipping';
     risEl.innerText = "Lancio in corso...";
     
     let audio = new Audio("suono.mp3");
@@ -65,19 +60,17 @@ function lancia() {
     audio.play();
 
     setTimeout(function() {
-        flipEl.style.opacity = 0;
+        coin.classList.remove('flipping');
         
         let nCasuale = Math.random();
         
         if (nCasuale < 0.5) {
             risEl.innerText = "TESTA!";
-            testaEl.style.opacity = 1;
-            testaEl.style.transform = "scale(1) rotateY(0deg)";
+            coin.className = 'coin landing-head';
             testaCount++;
         } else {
             risEl.innerText = "CROCE!";
-            croceEl.style.opacity = 1;
-            croceEl.style.transform = "scale(1) rotateY(0deg)";
+            coin.className = 'coin landing-tail';
             croceCount++;
         }
         
@@ -85,15 +78,13 @@ function lancia() {
         updateStats();
 
         setTimeout(function() {
-            testaEl.style.opacity = 0;
-            croceEl.style.opacity = 0;
-            testaEl.style.transform = "scale(0) rotateY(180deg)";
-            croceEl.style.transform = "scale(0) rotateY(180deg)";
+            coin.className = 'coin';
             risEl.innerText = "Pronto a lanciare?";
+            btn.disabled = false;
             isAnimating = false;
         }, 3500);
 
-    }, 1200);
+    }, 1500);
 }
 
 function updateStats() {
